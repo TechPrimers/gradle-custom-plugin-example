@@ -1,0 +1,45 @@
+class YoutubePluginExtension {
+    def featureName
+    def length
+    def tags
+}
+
+class YoutubePlugin implements Plugin<Project> {
+
+    @Override
+    void apply(Project project) {
+
+        def extension = project.extensions.create("features", YoutubePluginExtension)
+
+        project.task("play") {
+
+            doFirst {
+                println "Printed first"
+                println "Extension featureName: " + extension.featureName
+                println "Extension tags: " + extension.tags
+                println "Extension length: " + extension.length
+            }
+            doLast {
+                println "Playing YoutubeVideo"
+            }
+        }
+
+        project.task("pause") {
+            doLast {
+                println "pause the video"
+            }
+        }
+    }
+}
+
+
+
+group 'com.techprimers'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: YoutubePlugin
+
+
+sourceCompatibility = 1.8
+
